@@ -76,48 +76,6 @@
     <p id="result">Converted temperature: {{ converted_temperature }} {{ converted_scale }}</p>
     {% endif %}
   </div>
-
-  <script>
-    const convertBtn = document.getElementById('convertBtn');
-    const scaleDropdown = document.getElementById('scale');
-    const inputField = document.getElementById('temperature');
-    const resultField = document.getElementById('result');
-
-    convertBtn.addEventListener('click', () => {
-      const selectedScale = scaleDropdown.value;
-      const temperature = parseFloat(inputField.value);
-
-      if (isNaN(temperature)) {
-        resultField.textContent = 'Invalid input';
-        return;
-      }
-
-      let convertedTemperature;
-
-      if (selectedScale === 'celsius') {
-        convertedTemperature = convertToCelsius(temperature);
-      } else if (selectedScale === 'fahrenheit') {
-        convertedTemperature = convertToFahrenheit(temperature);
-      } else if (selectedScale === 'kelvin') {
-        convertedTemperature = convertToKelvin(temperature);
-      }
-
-      resultField.textContent = convertedTemperature;
-    });
-
-    function convertToCelsius(temperature) {
-      return ((temperature - 32) * 5 / 9).toFixed(2) + ' °C';
-    }
-
-    function convertToFahrenheit(temperature) {
-      return (temperature * 9 / 5 + 32).toFixed(2) + ' °F';
-    }
-
-    function convertToKelvin(temperature) {
-      return (temperature + 273.15).toFixed(2) + ' K';
-    }
-
-  </script>
 </body>
 
 </html>
