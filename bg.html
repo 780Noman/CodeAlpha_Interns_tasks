@@ -1,0 +1,160 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Background Color Generator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color:#888fae;
+        }
+        .container {
+            width: 300px;
+            height: 200px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #c72727, #ffffff);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-code {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 13px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="color" class="color-code">#000000</div>
+        <button id="generateBtn">Generate Color</button>
+        <button id="copyBtn">Copy Color Code</button>
+    </div>
+
+    <script>
+        function generateColor() {
+            var randomColor;
+            if (Math.random() < 0.5) {
+                // Generate basic color
+                randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            } else {
+                // Generate gradient color
+                var gradientColors = [
+                    '#' + Math.floor(Math.random() * 16777215).toString(16),
+                    '#' + Math.floor(Math.random() * 16777215).toString(16)
+                ];
+                randomColor = 'linear-gradient(to right, ' + gradientColors[0] + ', ' + gradientColors[1] + ')';
+            }
+
+            document.getElementById('color').textContent = randomColor;
+            document.body.style.background = randomColor;
+        }
+
+        function copyColorCode() {
+            var colorCode = document.getElementById('color').textContent;
+            navigator.clipboard.writeText(colorCode)
+                .then(() => {
+                    alert('Color code copied to clipboard: ' + colorCode);
+                })
+                .catch((error) => {
+                    console.error('Failed to copy color code: ', error);
+                });
+        }
+
+        document.getElementById('generateBtn').addEventListener('click', generateColor);
+        document.getElementById('copyBtn').addEventListener('click', copyColorCode);
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Background Generator</title>
+    <style>
+        .container {
+            width: 400px;
+            height: 200px;
+            border-radius: 15px;
+            background: rgb(87, 36, 36);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .color-code {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Background Generator!</h1>
+    <div class="container">
+        <div id="color" class="color-code">{{ gradient_color }}</div>
+        <form action="/generate" method="GET">
+            <button id="generateBtn" type="submit">Generate Color</button>
+        </form>
+        <button id="copyBtn">Copy Color Code</button>
+    </div>
+    <script>
+        function copyColorCode() {
+            var colorCode = document.getElementById('color').textContent;
+            navigator.clipboard.writeText(colorCode)
+                .then(() => {
+                    alert('Color code copied to clipboard: ' + colorCode);
+                })
+                .catch((error) => {
+                    console.error('Failed to copy color code: ', error);
+                });
+        }
+
+        document.getElementById('copyBtn').addEventListener('click', copyColorCode);
+
+
+        var gradientColor = "{{ gradient_color }}";
+        document.body.style.background = gradientColor;
+    </script>
+</body>
+
+</html>
