@@ -1,0 +1,122 @@
+<!-- Task-1 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: aliceblue;
+      background-color: #1a0707;
+    }
+
+    h1 {
+      margin-top: 150px;
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input {
+      margin-top: 30px;
+      padding: 15px;
+      font-size: 20px;
+    }
+
+    select {
+      margin-top: 30px;
+      padding: 15px;
+      font-size: 20px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 8px 10px;
+      background-color: #3c3ff8;
+      color: white;
+      border: 3px solid #0c4719;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 60px;
+      font-size: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Temperature Converter</h1>
+  <div class="container">
+    <form method="POST" action="/">
+      <label for="temperature">Temperature:</label>
+      <input type="number" id="temperature" name="temperature" placeholder="Enter the temperature" required>
+      <label for="scale">Scale:</label>
+      <select id="scale" name="scale" required>
+        <option value="choice">Choice One</option>
+        <option value="celsius">Celsius</option>
+        <option value="fahrenheit">Fahrenheit</option>
+        <option value="kelvin">Kelvin</option>
+      </select>
+      <br>
+      <button type="submit">Convert</button>
+    </form>
+    {% if converted_temperature %}
+    <p id="result">Converted temperature: {{ converted_temperature }} {{ converted_scale }}</p>
+    {% endif %}
+  </div>
+
+  <script>
+    const convertBtn = document.getElementById('convertBtn');
+    const scaleDropdown = document.getElementById('scale');
+    const inputField = document.getElementById('temperature');
+    const resultField = document.getElementById('result');
+
+    convertBtn.addEventListener('click', () => {
+      const selectedScale = scaleDropdown.value;
+      const temperature = parseFloat(inputField.value);
+
+      if (isNaN(temperature)) {
+        resultField.textContent = 'Invalid input';
+        return;
+      }
+
+      let convertedTemperature;
+
+      if (selectedScale === 'celsius') {
+        convertedTemperature = convertToCelsius(temperature);
+      } else if (selectedScale === 'fahrenheit') {
+        convertedTemperature = convertToFahrenheit(temperature);
+      } else if (selectedScale === 'kelvin') {
+        convertedTemperature = convertToKelvin(temperature);
+      }
+
+      resultField.textContent = convertedTemperature;
+    });
+
+    function convertToCelsius(temperature) {
+      return ((temperature - 32) * 5 / 9).toFixed(2) + ' °C';
+    }
+
+    function convertToFahrenheit(temperature) {
+      return (temperature * 9 / 5 + 32).toFixed(2) + ' °F';
+    }
+
+    function convertToKelvin(temperature) {
+      return (temperature + 273.15).toFixed(2) + ' K';
+    }
+
+  </script>
+</body>
+
+</html>
