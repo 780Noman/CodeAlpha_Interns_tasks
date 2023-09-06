@@ -30,9 +30,9 @@ def temperature_converter():
             converted_temperature = 'Invalid input'
             converted_scale = ''
 
-        return render_template('index.html', converted_temperature=converted_temperature, converted_scale=converted_scale)
+        return render_template('index1.html', converted_temperature=converted_temperature, converted_scale=converted_scale)
 
-    return render_template('index.html')
+    return render_template('index1.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
